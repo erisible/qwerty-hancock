@@ -1,10 +1,8 @@
-/* jshint browser: true, node: true */
-'use strict';
+'use strict'
 
-var jsdom = require('jsdom').jsdom;
-
+var jsdom = require('jsdom').jsdom
 
 module.exports = function (markup) {
-  global.document = jsdom(markup || '');
-  global.window = document.parentWindow;
-};
+  global.document = jsdom(markup || '')
+  global.window = document.parentWindow
+}
