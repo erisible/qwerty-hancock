@@ -98,9 +98,7 @@
    * @param {number|string} value 
    */
   var change = function (us, key, value) {
-    var container = document.getElementById(us.id)
-    removeListeners.call(this, container)
-    destroyKeyboard()
+    this.destroy()
     us[key] = value
     init.call(this, us)
   }
@@ -477,7 +475,6 @@
     }
     if (keyboardDown(event, this.keyDown)) {
       event.preventDefault()
-      console.log('keyDown', this)
     }
   }
 
@@ -491,7 +488,6 @@
     }
     if (keyboardUp(event, this.keyUp)) {
       event.preventDefault()
-      console.log('keyUp')
     }
   }
 
@@ -635,6 +631,12 @@
     } else {
       throw new Error('QwertyHancock.set: "' + key + '" doesn\'t exist.')
     }
+  }
+
+  QwertyHancock.prototype.destroy = function () {
+    var container = document.getElementById(settings.id)
+    removeListeners.call(this, container)
+    destroyKeyboard()
   }
 
   if (typeof exports !== 'undefined') {

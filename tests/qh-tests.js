@@ -108,6 +108,13 @@ describe('Qwerty Hancock tests', function () {
     expect(d4Key.style.backgroundColor).toBe('rgb(255, 255, 255)')
   })
 
+  it('Can destroy keyboard', function () {
+    var qh = new QwertyHancock()
+    qh.destroy()
+
+    expect(element.querySelectorAll('li').length.toEqual(0))
+  })
+
   describe('Tests with new element container', function () {
     'use strict'
 

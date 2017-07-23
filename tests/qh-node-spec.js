@@ -85,6 +85,13 @@ describe('QwertyHancock', function () {
     expect(firstWhiteKey.id).toBe('C4')
   })
 
+  it('Can destroy keyboard', function () {
+    var qh = new QwertyHancock()
+    qh.destroy()
+
+    expect(element.querySelectorAll('li').length.toEqual(0))
+  })
+
   describe('Tests with new element container', function () {
     'use strict'
 
