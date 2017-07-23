@@ -64,3 +64,9 @@ keyboard.get('id') // return 'keyboard'
 
 keyboard.set('octaves', 3) // rebuild keyboard with 3 octaves
 ```
+
+Furthermore, Qwerty Hancock provides a destructor method which removes all the attached events and deletes the keyboard.
+
+```javascript
+keyboard.destroy()
+```
