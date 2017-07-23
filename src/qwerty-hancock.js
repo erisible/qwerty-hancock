@@ -43,6 +43,9 @@
     221: 'F#u',
     220: 'Gu'
   }
+  var handlerKeyboardDown
+  var handlerKeyboardUp
+  var handlerMouseEvent
 
   /**
    * Calculate width of white key.
@@ -474,11 +477,12 @@
     }
     if (keyboardDown(event, this.keyDown)) {
       event.preventDefault()
+      console.log('keyDown', this)
     }
   }
 
   /**
-   * Handler for the 'keyup' action
+   * Handle method for the 'keyup' action
    * @param {object} event
    */
   var handleKeyboardUp = function (event) {
@@ -487,11 +491,12 @@
     }
     if (keyboardUp(event, this.keyUp)) {
       event.preventDefault()
+      console.log('keyUp')
     }
   }
 
   /**
-   * Generic handler for mouse|touch events
+   * Generic handle method for mouse|touch events
    * @param {object} event
    */
   var handleMouseEvent = function (event) {
@@ -520,35 +525,38 @@
    * @param {element} keyboardElement
    */
   var addListeners = function (keyboardElement) {
-    var that = this
+    // functions with bind() provide new references, saving them in variables makes the later events remove possible
+    handlerKeyboardDown = handleKeyboardDown.bind(this)
+    handlerKeyboardUp = handleKeyboardUp.bind(this)
+    handlerMouseEvent = handleMouseEvent.bind(this)
 
     // Key is pressed down on keyboard.
-    globalWindow.addEventListener('keydown', handleKeyboardDown.bind(that))
+    globalWindow.addEventListener('keydown', handlerKeyboardDown)
 
     // Key is released on keyboard.
-    globalWindow.addEventListener('keyup', handleKeyboardUp.bind(that))
+    globalWindow.addEventListener('keyup', handlerKeyboardUp)
 
     // Mouse is clicked down on keyboard element.
-    keyboardElement.addEventListener('mousedown', handleMouseEvent.bind(that))
+    keyboardElement.addEventListener('mousedown', handlerMouseEvent)
 
     // Mouse is released from keyboard element.
-    keyboardElement.addEventListener('mouseup', handleMouseEvent.bind(that))
+    keyboardElement.addEventListener('mouseup', handlerMouseEvent)
 
     // Mouse is moved over keyboard element.
-    keyboardElement.addEventListener('mouseover', handleMouseEvent.bind(that))
+    keyboardElement.addEventListener('mouseover', handlerMouseEvent)
 
     // Mouse is moved out of keyvoard element.
-    keyboardElement.addEventListener('mouseout', handleMouseEvent.bind(that))
+    keyboardElement.addEventListener('mouseout', handlerMouseEvent)
 
     // Device supports touch events.
     if ('ontouchstart' in document.documentElement) {
-      keyboardElement.addEventListener('touchstart', handleMouseEvent.bind(that))
+      keyboardElement.addEventListener('touchstart', handlerMouseEvent)
 
-      keyboardElement.addEventListener('touchend', handleMouseEvent.bind(that))
+      keyboardElement.addEventListener('touchend', handlerMouseEvent)
 
-      keyboardElement.addEventListener('touchleave', handleMouseEvent.bind(that))
+      keyboardElement.addEventListener('touchleave', handlerMouseEvent)
 
-      keyboardElement.addEventListener('touchcancel', handleMouseEvent.bind(that))
+      keyboardElement.addEventListener('touchcancel', handlerMouseEvent)
     }
   }
 
@@ -557,29 +565,27 @@
    * @param {element} keyboardElement
    */
   var removeListeners = function (keyboardElement) {
-    var that = this
+    globalWindow.removeEventListener('keydown', handlerKeyboardDown)
 
-    globalWindow.removeEventListener('keydown', handleKeyboardDown.bind(that))
+    globalWindow.removeEventListener('keyup', handlerKeyboardUp)
 
-    globalWindow.removeEventListener('keyup', handleKeyboardUp.bind(that))
+    keyboardElement.removeEventListener('mousedown', handlerMouseEvent)
 
-    keyboardElement.removeEventListener('mousedown', handleMouseEvent.bind(that))
+    keyboardElement.removeEventListener('mouseup', handlerMouseEvent)
 
-    keyboardElement.removeEventListener('mouseup', handleMouseEvent.bind(that))
+    keyboardElement.removeEventListener('mouseover', handlerMouseEvent)
 
-    keyboardElement.removeEventListener('mouseover', handleMouseEvent.bind(that))
-
-    keyboardElement.removeEventListener('mouseout', handleMouseEvent.bind(that))
+    keyboardElement.removeEventListener('mouseout', handlerMouseEvent)
 
     // Device supports touch events.
     if ('ontouchstart' in document.documentElement) {
-      keyboardElement.removeEventListener('touchstart', handleMouseEvent.bind(that))
+      keyboardElement.removeEventListener('touchstart', handlerMouseEvent)
 
-      keyboardElement.removeEventListener('touchend', handleMouseEvent.bind(that))
+      keyboardElement.removeEventListener('touchend', handlerMouseEvent)
 
-      keyboardElement.removeEventListener('touchleave', handleMouseEvent.bind(that))
+      keyboardElement.removeEventListener('touchleave', handlerMouseEvent)
 
-      keyboardElement.removeEventListener('touchcancel', handleMouseEvent.bind(that))
+      keyboardElement.removeEventListener('touchcancel', handlerMouseEvent)
     }
   }
 
