@@ -85,6 +85,31 @@ describe('QwertyHancock', function () {
     expect(firstWhiteKey.id).toBe('C4')
   })
 
+  describe('Tests with new element container', function () {
+    'use strict'
+
+    var newElement
+
+    beforeEach(function () {
+      newElement = document.createElement('div')
+      newElement.id = 'new-keyboard'
+      document.body.appendChild(newElement)
+    })
+
+    it('Can recreate keyboard with modified settings', function () {
+      var qh = new QwertyHancock()
+      qh.set('id', 'new-keyboard')
+
+      expect(newElement.id).toBe('new-keyboard')
+      expect(newElement.querySelectorAll('li').length).toBeGreaterThan(0)
+      expect(element.querySelectorAll('li').length).toEqual(0)
+    })
+
+    afterEach(function () {
+      document.body.removeChild(newElement)
+    })
+  })
+
   afterEach(function () {
     document.body.removeChild(element)
     delete global.document
