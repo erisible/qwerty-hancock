@@ -584,7 +584,7 @@
   }
 
   var isUndef = function (value) {
-    return typeof settings[value] !== 'undefined'
+    return typeof settings[value] === 'undefined'
   }
 
   /**
