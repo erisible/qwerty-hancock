@@ -85,11 +85,17 @@ describe('QwertyHancock', function () {
     expect(firstWhiteKey.id).toBe('C4')
   })
 
+  it('Can get a setting value', function () {
+    var qh = new QwertyHancock()
+
+    expect(qh.get('id')).toBe('keyboard')
+  })
+
   it('Can destroy keyboard', function () {
     var qh = new QwertyHancock()
     qh.destroy()
 
-    expect(element.querySelectorAll('li').length.toEqual(0))
+    expect(element.querySelectorAll('li').length).toEqual(0)
   })
 
   describe('Tests with new element container', function () {
@@ -103,13 +109,26 @@ describe('QwertyHancock', function () {
       document.body.appendChild(newElement)
     })
 
-    it('Can recreate keyboard with modified settings', function () {
+    it('Can set a single parameter after initialization', function () {
       var qh = new QwertyHancock()
       qh.set('id', 'new-keyboard')
 
-      expect(newElement.id).toBe('new-keyboard')
+      expect(qh.get('id')).toBe('new-keyboard')
       expect(newElement.querySelectorAll('li').length).toBeGreaterThan(0)
       expect(element.querySelectorAll('li').length).toEqual(0)
+    })
+
+    it('Can set multiple parameters at once after initialization', function () {
+      var qh = new QwertyHancock()
+      qh.set({
+        'id': 'new-keyboard',
+        'octaves': 3
+      })
+
+      expect(qh.get('id')).toBe('new-keyboard')
+      expect(newElement.querySelectorAll('li').length).toBeGreaterThan(0)
+      expect(element.querySelectorAll('li').length).toEqual(0)
+      expect(qh.get('octaves')).toBe(3)
     })
 
     afterEach(function () {

@@ -72,7 +72,7 @@
       blackKeyColour: userSettings.blackKeyColour || '#000',
       activeColour: userSettings.activeColour || 'yellow',
       borderColour: userSettings.borderColour || '#000',
-      keyboardLayout: userSettings.keyboardLayout || 'en'
+      keyboardLayout: userSettings.keyboardLayout || 'en' // TODO: add keyMap 'fr' support
     }
 
     var container = document.getElementById(settings.id)
@@ -94,13 +94,13 @@
   /**
    * Rebuild keyboard with new settings
    * @param {object} us 
-   * @param {string} key
-   * @param {number|string} value 
    */
-  var change = function (us, key, value) {
+  var change = function (ns) {
     this.destroy()
-    us[key] = value
-    init.call(this, us)
+    for (var key in ns) {
+      settings[key] = ns[key]
+    }
+    init.call(this, settings)
   }
 
   /**
@@ -593,7 +593,7 @@
    * Qwerty Hancock constructor.
    * @param {object} settings Optional user settings.
    */
-  var QwertyHancock = function (settings) {
+  var QwertyHancock = function (settings) { // NOTE: ability to add/remove events without destroying the keyboard ?
     this.version = version
 
     this.keyDown = function () {
@@ -621,15 +621,32 @@
   }
 
   /**
-   * Set user settings value
-   * @param {string} key
-   * @param {number|string}
+   * Set user settings at once by passing in an object
+   * or set a single parameter by passing in a string and a value
+   * @param {object|string} params
+   * @param {number|string} value
    */
-  QwertyHancock.prototype.set = function (key, value) {
-    if (!isUndef(key)) {
-      change.call(this, settings, key, value)
+  QwertyHancock.prototype.set = function (params, value) {
+    if (typeof params === 'string') {
+      var tmpObj = {}
+      tmpObj[params] = value
+      params = tmpObj
+    }
+
+    var paramsLength = 0
+
+    for (var key in params) {
+      if (isUndef(key)) {
+        delete params[key]
+      } else {
+        paramsLength += 1
+      }
+    }
+
+    if (paramsLength > 0) {
+      change.call(this, params)
     } else {
-      throw new Error('QwertyHancock.set: "' + key + '" doesn\'t exist.')
+      throw new Error('QwertyHancock.set: invalid parameter')
     }
   }
 

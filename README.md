@@ -57,12 +57,24 @@ keyboard.keyUp = function (note, frequency) {
 ```
 *Source: [Qwerty Hancock homepage](http://stuartmemo.com/qwerty-hancock)*
 
+You can get any avaible option after initialization of the keyboard.
 After initialization of a keyboard, you can get or set any available option.
 
 ```javascript
 keyboard.get('id') // return 'keyboard'
+```
 
-keyboard.set('octaves', 3) // rebuild keyboard with 3 octaves
+You can also set a single parameter by passing in a string and a value or set settings at once by passing in an object.
+
+```
+// rebuild keyboard with 3 octaves
+keyboard.set('octaves', 3)
+
+// rebuild keyboard inside element with id="new-keyboard" and 3 octaves
+keyboard.set({
+  'id': 'new-keyboard',
+  'octaves': 3
+})
 ```
 
 Furthermore, Qwerty Hancock provides a destructor method which removes all the attached events and deletes the keyboard.
