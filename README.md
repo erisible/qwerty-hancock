@@ -13,8 +13,6 @@ Add the minified version of the code to your html by adding the following script
 <script src="scripts/qwerty-hancock.min.js"></script>
 ```
 
-Alternatively, if you're a bower fan: `bower install qwerty-hancock`
-
 ## Keyboard
 
 Once you've included Qwerty Hancock on your page, visit the [Qwerty Hancock homepage](http://stuartmemo.com/qwerty-hancock) for information on how to initialise and customise the keyboard.
