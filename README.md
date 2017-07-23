@@ -66,7 +66,7 @@ keyboard.get('id') // return 'keyboard'
 
 You can also set a single parameter by passing in a string and a value or set settings at once by passing in an object.
 
-```
+```javascript
 // rebuild keyboard with 3 octaves
 keyboard.set('octaves', 3)
 
