@@ -91,7 +91,7 @@ describe('Qwerty Hancock tests', function () {
     var qh = new QwertyHancock()
     var c4Key = document.querySelector('#C4')
 
-    pressKey(65)
+    pressKey('KeyA')
 
     expect(c4Key.style.backgroundColor).toBe('yellow')
   })
@@ -100,7 +100,7 @@ describe('Qwerty Hancock tests', function () {
     var qh = new QwertyHancock()
     var d4Key = document.querySelector('#D4')
 
-    pressKey(83, {
+    pressKey('KeyS', {
       metaKey: true
     })
 

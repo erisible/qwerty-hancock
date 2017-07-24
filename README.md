@@ -25,7 +25,6 @@ Qwerty Hancock has no dependencies whatsoever. All you need to do is include qwe
 - `whiteNotesColour`: The colour of the white "natural" keys
 - `blackNotesColour`: The colour of the black "accidental" keys
 - `activeColour`: The keyOn active colour
-- `keyboardLayout`: Currently supports `en` and `de`
 
 A real-world example might look like this:
 
@@ -40,7 +39,6 @@ var keyboard = new QwertyHancock({
    blackNotesColour: 'black',
    activeColour: 'yellow',
    borderColour: '#000',
-   keyboardLayout: 'en'
 })
 ```
 

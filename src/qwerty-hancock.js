@@ -20,28 +20,26 @@
   var mouseIsDown = false
   var keysDown = {}
   var keyMap = {
-    65: 'Cl',
-    87: 'C#l',
-    83: 'Dl',
-    69: 'D#l',
-    68: 'El',
-    70: 'Fl',
-    84: 'F#l',
-    71: 'Gl',
-    89: 'G#l',
-    90: 'G#l',
-    72: 'Al',
-    85: 'A#l',
-    74: 'Bl',
-    75: 'Cu',
-    79: 'C#u',
-    76: 'Du',
-    80: 'D#u',
-    59: 'Eu',
-    186: 'Eu',
-    222: 'Fu',
-    221: 'F#u',
-    220: 'Gu'
+    'KeyA': 'Cl',
+    'KeyW': 'C#l',
+    'KeyS': 'Dl',
+    'KeyE': 'D#l',
+    'KeyD': 'El',
+    'KeyF': 'Fl',
+    'KeyT': 'F#l',
+    'KeyG': 'Gl',
+    'KeyY': 'G#l',
+    'KeyH': 'Al',
+    'KeyU': 'A#l',
+    'KeyJ': 'Bl',
+    'KeyK': 'Cu',
+    'KeyO': 'C#u',
+    'KeyL': 'Du',
+    'KeyP': 'D#u',
+    'Semicolon': 'Eu',
+    'Quote': 'Fu',
+    'BracketRight': 'F#u',
+    'Backslash': 'Gu'
   }
   var handlerKeyboardDown
   var handlerKeyboardUp
@@ -71,8 +69,7 @@
       whiteKeyColour: userSettings.whiteKeyColour || '#fff',
       blackKeyColour: userSettings.blackKeyColour || '#000',
       activeColour: userSettings.activeColour || 'yellow',
-      borderColour: userSettings.borderColour || '#000',
-      keyboardLayout: userSettings.keyboardLayout || 'en' // TODO: add keyMap 'fr' support
+      borderColour: userSettings.borderColour || '#000'
     }
 
     var container = document.getElementById(settings.id)
@@ -403,8 +400,8 @@
     container.removeAttribute('style')
   }
 
-  var getKeyPressed = function (keyCode) {
-    return keyMap[keyCode]
+  var getKeyPressed = function (code) {
+    return keyMap[code]
       .replace('l', parseInt(settings.startOctave, 10) + settings.keyPressOffset)
       .replace('u', (parseInt(settings.startOctave, 10) + settings.keyPressOffset + 1)
         .toString())
@@ -418,15 +415,14 @@
    */
   var keyboardDown = function (key, callback) {
     var keyPressed
-
-    if (key.keyCode in keysDown) {
+    if (key.code in keysDown) {
       return false
     }
 
-    keysDown[key.keyCode] = true
+    keysDown[key.code] = true
 
-    if (typeof keyMap[key.keyCode] !== 'undefined') {
-      keyPressed = getKeyPressed(key.keyCode)
+    if (typeof keyMap[key.code] !== 'undefined') {
+      keyPressed = getKeyPressed(key.code)
 
       // Call user's noteDown function.
       callback(keyPressed, getFrequencyOfNote(keyPressed))
@@ -445,10 +441,10 @@
   var keyboardUp = function (key, callback) {
     var keyPressed
 
-    delete keysDown[key.keyCode]
+    delete keysDown[key.code]
 
-    if (typeof keyMap[key.keyCode] !== 'undefined') {
-      keyPressed = getKeyPressed(key.keyCode)
+    if (typeof keyMap[key.code] !== 'undefined') {
+      keyPressed = getKeyPressed(key.code)
       // Call user's noteDown function.
       callback(keyPressed, getFrequencyOfNote(keyPressed))
       darkenDown(document.getElementById(keyPressed))
