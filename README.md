@@ -80,3 +80,10 @@ Furthermore, Qwerty Hancock provides a destructor method which removes all the a
 ```javascript
 keyboard.destroy()
 ```
+
+Eventually you may need to momentarily stop listening events from the keyboard without destroying it. For such cases Qwerty Handcock provides 2 heplful methods to pause and resume events listeners
+
+```javascript
+keyboard.pauseListener()
+keyboard.resumeListener()
+```

@@ -33,6 +33,6 @@
     "karma-safari-launcher": "~1.0.0"
   },
   "scripts": {
-    "test": "karma start ./karma-conf.js --browsers Firefox --single-run"
+    "test": "karma start ./karma-conf.js --browsers Firefox"
   }
 }

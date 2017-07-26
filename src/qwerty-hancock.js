@@ -646,9 +646,18 @@
     }
   }
 
-  QwertyHancock.prototype.destroy = function () {
+  QwertyHancock.prototype.pauseListener = function () {
     var container = document.getElementById(settings.id)
     removeListeners.call(this, container)
+  }
+
+  QwertyHancock.prototype.resumeListener = function () {
+    var container = document.getElementById(settings.id)
+    addListeners.call(this, container)
+  }
+
+  QwertyHancock.prototype.destroy = function () {
+    this.pauseListener()
     destroyKeyboard()
   }
 
