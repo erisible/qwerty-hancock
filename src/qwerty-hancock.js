@@ -15,7 +15,7 @@
    * In node context (browserify), `this` is the node global.
    */
   var globalWindow = typeof global === 'undefined' ? root : root.window
-  var version = '0.5.1'
+  var version = '0.5.5'
   var settings = {}
   var mouseIsDown = false
   var keysDown = {}
